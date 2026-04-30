@@ -1,15 +1,15 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Commande Confirmée | Judicia Luxe{% endblock %}
+{% block title %}Rendez-vous Confirmé | Judicia Luxe{% endblock %}
 
 {% block content %}
 <div class="container animate-fade" style="padding: 15rem 0; text-align: center;">
     <div class="glass-card" style="padding: 5rem; max-width: 700px; margin: 0 auto; border-color: var(--accent);">
         <i class="fas fa-check-circle fa-5x" style="color: var(--accent); margin-bottom: 3rem;"></i>
-        <h1 style="font-size: 3rem; margin-bottom: 2rem;">Merci pour votre confiance</h1>
+        <h1 style="font-size: 3rem; margin-bottom: 2rem;">Rendez-vous Confirmé</h1>
         <p class="text-muted" style="font-size: 1.2rem; margin-bottom: 4rem;">
-            Votre demande d'expertise a été enregistrée avec succès. <br>
-            Référence de commande : <strong>#{{ order.id }}</strong>
+            Votre demande de consultation a été enregistrée avec succès. <br>
+            Référence du dossier : <strong>#{{ order.id }}</strong>
         </p>
         
         <div style="text-align: left; background: rgba(0,0,0,0.2); padding: 3rem; border-radius: 8px; margin-bottom: 4rem;">

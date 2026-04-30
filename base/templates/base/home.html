@@ -1,224 +1,404 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Judicia Luxe | Cabinet d'Avocats Haut de Gamme{% endblock %}
+{% block title %}Judicia Luxe | Cabinet d'Avocats{% endblock %}
 
 {% block extra_css %}
     .hero {
         position: relative;
-        height: 100vh;
+        min-height: 85vh;
         display: flex;
         align-items: center;
-        justify-content: center;
-        text-align: center;
+        background-color: #000;
         background-image: 
-            linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), 
-            url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.2) 100%),
+            url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
         background-size: cover;
-        background-position: center;
-        margin-top: -100px;
-        z-index: 1;
-        padding-top: 100px;
+        background-position: center center;
+        margin-top: -80px;
+        padding-top: 80px;
+    }
+
+    .hero-content {
+        max-width: 600px;
+        margin-left: 5%;
     }
 
     .hero-content h1 {
-        font-size: 5.5rem;
+        font-size: 3.5rem;
         margin-bottom: 1.5rem;
-        font-weight: 700;
-        letter-spacing: -1px;
-        line-height: 1.1;
-        background: linear-gradient(to bottom, #FFFFFF 0%, #D4AF37 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+        letter-spacing: 2px;
+        line-height: 1.2;
+        color: var(--accent);
+        font-family: 'Georgia', serif;
     }
 
     .hero-content p {
-        font-size: 1.4rem;
-        color: var(--text-muted);
-        max-width: 700px;
-        margin: 0 auto 3rem;
-        font-weight: 300;
+        font-size: 1.1rem;
+        color: var(--text-light);
+        margin-bottom: 2.5rem;
+        line-height: 1.6;
+        max-width: 500px;
     }
 
-    .featured-services {
-        padding: 8rem 2rem;
-        background-color: var(--primary);
+    .section-white {
+        background-color: #ffffff;
+        color: #000000;
+        padding: 5rem 2rem;
+    }
+
+    .section-black {
+        background-color: #111111;
+        color: #ffffff;
+        padding: 5rem 2rem;
     }
 
     .section-title {
         text-align: center;
-        margin-bottom: 5rem;
+        margin-bottom: 3.5rem;
     }
 
     .section-title h2 {
-        font-size: 3rem;
+        font-size: 1.8rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        margin-bottom: 1rem;
+        font-family: 'Georgia', serif;
+    }
+    
+    .section-black .section-title h2 {
+        color: #ffffff;
+    }
+
+    .section-white .section-title h2 {
+        color: #000000;
+    }
+
+    .title-separator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        color: var(--accent);
+    }
+
+    .title-separator::before, .title-separator::after {
+        content: "";
+        height: 1px;
+        width: 40px;
+        background-color: var(--accent);
+    }
+
+    /* Expertise Grid */
+    .expertise-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .expertise-card {
+        background: #ffffff;
+        border: 1px solid #f0f0f0;
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .expertise-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .expertise-card i {
+        font-size: 2.5rem;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+    }
+
+    .expertise-card h3 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        letter-spacing: 1px;
+    }
+
+    .expertise-card p {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .expertise-card a {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    /* Why choose us Grid */
+    .why-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .why-item i {
+        font-size: 2.5rem;
         color: var(--accent);
         margin-bottom: 1rem;
     }
 
-    .section-title .underline {
-        width: 100px;
-        height: 2px;
-        background-color: var(--accent);
+    .why-item h4 {
+        font-size: 1rem;
+        font-weight: bold;
+        color: var(--accent);
+        margin-bottom: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .why-item p {
+        font-size: 0.85rem;
+        color: #ccc;
+        line-height: 1.5;
+    }
+
+    /* Testimonials Grid */
+    .testi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
         margin: 0 auto;
     }
 
-    .service-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 3rem;
+    .testi-card {
+        background: #ffffff;
+        border: 1px solid #f0f0f0;
+        padding: 2rem;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        position: relative;
     }
 
-    .service-card {
-        text-align: center;
-        padding: 3.5rem 2rem;
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 1px solid var(--glass-border);
-    }
-
-    .service-card:hover {
-        background: var(--secondary);
-        border-color: var(--accent);
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5), 0 18px 36px -18px rgba(0, 0, 0, 0.5);
-    }
-
-    .service-card i {
-        font-size: 3rem;
+    .testi-card .quote-icon {
         color: var(--accent);
-        margin-bottom: 2rem;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
     }
 
-    .service-card h3 {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .service-card p {
-        color: var(--text-muted);
-        margin-bottom: 2.5rem;
-    }
-
-    .learn-more {
-        color: var(--accent);
-        text-decoration: none;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 0.85rem;
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.3s ease;
-    }
-
-    .learn-more:hover {
-        border-color: var(--accent);
-    }
-
-    .stats {
-        padding: 6rem 2rem;
-        background-color: var(--secondary);
-    }
-
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        text-align: center;
-    }
-
-    .stat-item h4 {
-        font-size: 3.5rem;
-        color: var(--accent);
-        margin-bottom: 0.5rem;
-    }
-
-    .stat-item p {
+    .testi-card p {
         font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: var(--text-muted);
+        font-style: italic;
+        color: #444;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
     }
 
-    @media (max-width: 768px) {
-        .hero-content h1 { font-size: 3.5rem; }
-        .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .testi-author {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.85rem;
+    }
+
+    .testi-stars {
+        color: var(--accent);
+        font-size: 0.8rem;
+    }
+
+    .testi-name {
+        font-weight: bold;
+        color: #000;
+    }
+
+    /* CTA Banner */
+    .cta-banner {
+        background-color: #1a1a1a;
+        max-width: 1200px;
+        margin: 0 auto 4rem;
+        padding: 2.5rem 3rem;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .cta-text {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .cta-text i {
+        font-size: 2.5rem;
+        color: var(--accent);
+    }
+
+    .cta-text h3 {
+        margin: 0 0 0.3rem 0;
+        font-size: 1.3rem;
+        color: #fff;
+    }
+
+    .cta-text p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #ccc;
     }
 {% endblock %}
 
 {% block content %}
+    <!-- HERO SECTION -->
     <section class="hero animate-fade">
         <div class="hero-content">
-            <h1>LA PERFECTION <br> JURIDIQUE</h1>
-            <p>Defense, Conseil et Stratégie d'excellence pour une clientèle internationale exigeante.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center;">
-                <a href="{% url 'service_list' %}" class="cta-btn">Nos Expertises</a>
-                <a href="#" class="cta-btn" style="background: transparent; border: 1px solid var(--accent); color: var(--accent) !important;">Contactez-nous</a>
+            <h1>SÉCURITÉ & <br> CONFIDENTIALITÉ ABSOLUE</h1>
+            <p>Vos dossiers judiciaires exigent le plus haut niveau de protection. Un espace strictement confidentiel et crypté pour vos affaires pénales et contentieux d'affaires.</p>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <a href="{% url 'service_list' %}" class="cta-btn"><i class="far fa-calendar-alt"></i> PRENDRE RENDEZ-VOUS</a>
+                <a href="{% url 'service_list' %}" class="cta-btn-outline">DÉCOUVRIR NOS SERVICES</a>
             </div>
         </div>
     </section>
 
-    <div class="container">
-        <section class="featured-services">
-            <div class="section-title">
-                <h2>DOMAINES D'EXCELLENCE</h2>
-                <div class="underline"></div>
+    <!-- EXPERTISE SECTION -->
+    <section class="section-white">
+        <div class="section-title">
+            <h2>NOS DOMAINES D'EXPERTISE</h2>
+            <div class="title-separator"><i class="fas fa-balance-scale"></i></div>
+        </div>
+        
+        <div class="expertise-grid">
+            <div class="expertise-card">
+                <i class="fas fa-gavel"></i>
+                <h3>DROIT PÉNAL</h3>
+                <p>Défense et représentation dans toutes les affaires pénales.</p>
+                <a href="{% url 'service_list' %}">En savoir plus &rarr;</a>
             </div>
-            <div class="service-grid">
-                {% for service in featured_services %}
-                    <div class="service-card glass-card">
-                        <i class="fas fa-balance-scale"></i>
-                        <h3>{{ service.name }}</h3>
-                        <p>{{ service.description|truncatewords:20 }}</p>
-                        <a href="{% url 'service_list' %}" class="learn-more">Explorer l'expertise <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                {% empty %}
-                    <div class="service-card glass-card">
-                        <i class="fas fa-gavel"></i>
-                        <h3>Droit des Affaires</h3>
-                        <p>Accompagnement stratégique pour les entreprises et transactions complexes.</p>
-                        <a href="#" class="learn-more">Explorer <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="service-card glass-card" style="border-color: var(--accent);">
-                        <i class="fas fa-building"></i>
-                        <h3>Droit de l'Immobilier</h3>
-                        <p>Gestion d'actifs immobiliers de luxe et contentieux fonciers d'envergure.</p>
-                        <a href="#" class="learn-more">Explorer <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="service-card glass-card">
-                        <i class="fas fa-shield-alt"></i>
-                        <h3>Droit Pénal International</h3>
-                        <p>Défense pénale rigoureuse devant les juridictions les plus prestigieuses.</p>
-                        <a href="#" class="learn-more">Explorer <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                {% endfor %}
+            
+            <div class="expertise-card">
+                <i class="fas fa-user-friends"></i>
+                <h3>DROIT CIVIL</h3>
+                <p>Gestion des litiges entre particuliers et accompagnement juridique.</p>
+                <a href="{% url 'service_list' %}">En savoir plus &rarr;</a>
             </div>
-        </section>
+            
+            <div class="expertise-card">
+                <i class="fas fa-briefcase"></i>
+                <h3>DROIT DES AFFAIRES</h3>
+                <p>Conseil et assistance juridique pour les entreprises.</p>
+                <a href="{% url 'service_list' %}">En savoir plus &rarr;</a>
+            </div>
+            
+            <div class="expertise-card">
+                <i class="far fa-file-alt"></i>
+                <h3>CONSEIL JURIDIQUE</h3>
+                <p>Consultations juridiques pour comprendre vos droits.</p>
+                <a href="{% url 'service_list' %}">En savoir plus &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="section-black">
+        <div class="section-title">
+            <h2>POURQUOI NOUS CHOISIR ?</h2>
+            <div class="title-separator"><i class="fas fa-balance-scale"></i></div>
+        </div>
+
+        <div class="why-grid">
+            <div class="why-item">
+                <i class="fas fa-lock"></i>
+                <h4>CONFIDENTIALITÉ GARANTIE</h4>
+                <p>Vos informations sont protégées avec le plus haut niveau de sécurité.</p>
+            </div>
+            
+            <div class="why-item">
+                <i class="fas fa-user-tie"></i>
+                <h4>AVOCATS EXPÉRIMENTÉS</h4>
+                <p>Une équipe d'experts à votre écoute et à votre service.</p>
+            </div>
+            
+            <div class="why-item">
+                <i class="far fa-clock"></i>
+                <h4>RÉPONSE RAPIDE</h4>
+                <p>Nous nous engageons à vous répondre dans les meilleurs délais.</p>
+            </div>
+            
+            <div class="why-item">
+                <i class="far fa-handshake"></i>
+                <h4>ACCOMPAGNEMENT PERSONNALISÉ</h4>
+                <p>Un suivi sur mesure adapté à votre situation et à vos besoins.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section-white">
+        <div class="section-title">
+            <h2>ILS NOUS FONT CONFIANCE</h2>
+            <div class="title-separator"><i class="fas fa-balance-scale"></i></div>
+        </div>
+
+        <div class="testi-grid">
+            <div class="testi-card">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>Un service professionnel et une équipe à l'écoute. Je me suis senti en confiance tout au long de mon dossier.</p>
+                <div class="testi-author">
+                    <div class="testi-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testi-name">- Karim B.</div>
+                </div>
+            </div>
+            
+            <div class="testi-card">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>Cabinet très réactif et compétent. Ils ont su m'accompagner efficacement.</p>
+                <div class="testi-author">
+                    <div class="testi-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testi-name">- Samira El.</div>
+                </div>
+            </div>
+            
+            <div class="testi-card">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>Je recommande vivement Judicia Luxe pour leur sérieux et leur discrétion.</p>
+                <div class="testi-author">
+                    <div class="testi-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testi-name">- Youssef A.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <div class="section-white" style="padding-top: 0;">
+        <div class="cta-banner">
+            <div class="cta-text">
+                <i class="far fa-calendar-check"></i>
+                <div>
+                    <h3>BESOIN D'UN CONSEIL JURIDIQUE ?</h3>
+                    <p>Prenez rendez-vous dès maintenant avec l'un de nos avocats.</p>
+                </div>
+            </div>
+            <div>
+                <a href="{% url 'service_list' %}" class="cta-btn">PRENDRE RENDEZ-VOUS</a>
+            </div>
+        </div>
     </div>
-
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h4>25+</h4>
-                    <p>Années d'Expérience</p>
-                </div>
-                <div class="stat-item">
-                    <h4>15k+</h4>
-                    <p>Dossiers Gagnés</p>
-                </div>
-                <div class="stat-item">
-                    <h4>40+</h4>
-                    <p>Avocats Associés</p>
-                </div>
-                <div class="stat-item">
-                    <h4>98%</h4>
-                    <p>Taux de Succès</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="container" style="padding: 10rem 0; text-align: center;">
-        <h2 style="font-size: 3rem; margin-bottom: 2rem;">VOTRE SUCCÈS EST <br><span style="color: var(--accent);">NOTRE PRIORITÉ</span></h2>
-        <p style="color: var(--text-muted); max-width: 800px; margin: 0 auto 4rem; font-size: 1.2rem;">Chaque affaire est unique. Nous mobilisons les meilleurs talents pour construire une stratégie sur mesure, alliant rigueur juridique et vision d'avenir.</p>
-        <a href="#" class="cta-btn" style="padding: 1.2rem 3rem; font-size: 1.1rem;">Prendre Consultation <i class="fas fa-chevron-right" style="margin-left: 10px;"></i></a>
-    </section>
 {% endblock %}

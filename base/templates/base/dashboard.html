@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Espace Client | Judicia Luxe{% endblock %}
+
+{% block content %}
+<div class="container animate-fade" style="padding: 10rem 0 5rem;">
+    <h1 style="color: var(--accent); margin-bottom: 3rem;">Mon Espace Client</h1>
+    
+    <div class="row">
+        <!-- Informations personnelles -->
+        <div class="col-md-4 mb-4">
+            <div class="glass-card" style="padding: 2rem;">
+                <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;"><i class="fas fa-user"></i> Mon Profil</h3>
+                <p><strong>Nom d'utilisateur:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p style="margin-top: 2rem;"><a href="{% url 'contact' %}" class="btn btn-outline-light btn-sm" style="border-color: var(--accent); color: var(--accent);">Demander une modification</a></p>
+            </div>
+            
+            <div class="glass-card mt-4" style="padding: 2rem;">
+                <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;"><i class="fas fa-envelope"></i> Contact Direct</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Une question urgente concernant vos rendez-vous ?</p>
+                <a href="{% url 'contact' %}" class="cta-btn" style="width: 100%; text-align: center; padding: 0.5rem 1rem;">Contacter le cabinet</a>
+            </div>
+        </div>
+
+        <!-- Liste des rendez-vous -->
+        <div class="col-md-8">
+            <div class="glass-card" style="padding: 2rem;">
+                <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;"><i class="fas fa-calendar-check"></i> Mes Rendez-vous Historiques</h3>
+                
+                {% if orders %}
+                    <div class="table-responsive">
+                        <table class="table" style="color: var(--text-light);">
+                            <thead>
+                                <tr>
+                                    <th style="color: var(--text-muted); border-bottom: 1px solid var(--glass-border);">Réf</th>
+                                    <th style="color: var(--text-muted); border-bottom: 1px solid var(--glass-border);">Date de demande</th>
+                                    <th style="color: var(--text-muted); border-bottom: 1px solid var(--glass-border);">Type</th>
+                                    <th style="color: var(--text-muted); border-bottom: 1px solid var(--glass-border);">Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                <tr>
+                                    <td style="border-bottom: 1px solid var(--glass-border);">#{{ order.id }}</td>
+                                    <td style="border-bottom: 1px solid var(--glass-border);">{{ order.created_at|date:"d/m/Y H:i" }}</td>
+                                    <td style="border-bottom: 1px solid var(--glass-border);">{{ order.get_consultation_type_display }}</td>
+                                    <td style="border-bottom: 1px solid var(--glass-border);">
+                                        <span class="badge" style="background-color: {% if order.paid %}#28a745{% else %}var(--accent){% endif %}; color: #000;">
+                                            En cours d'étude
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div style="text-align: center; padding: 3rem 0;">
+                        <i class="fas fa-calendar-times fa-3x" style="color: var(--text-muted); opacity: 0.5; margin-bottom: 1rem;"></i>
+                        <p style="color: var(--text-muted);">Vous n'avez aucun rendez-vous pour le moment.</p>
+                        <a href="{% url 'service_list' %}" class="btn" style="color: var(--accent); border: 1px solid var(--accent); margin-top: 1rem;">Prendre un premier rendez-vous</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

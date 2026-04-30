@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Votre Panier | Judicia Luxe{% endblock %}
+{% block title %}Mes Consultations | Judicia Luxe{% endblock %}
 
 {% block extra_css %}
     .cart-container {
@@ -134,14 +134,14 @@
 
 {% block content %}
 <div class="container cart-container animate-fade">
-    <h1 class="cart-title">Votre Panier d'Expertises</h1>
+    <h1 class="cart-title">Vos Consultations Sélectionnées</h1>
 
     {% if cart.items.all %}
         <table class="cart-table">
             <thead>
                 <tr>
-                    <th>Expertise</th>
-                    <th>Quantité</th>
+                    <th>Avocat</th>
+                    <th>Consultations</th>
                     <th>Total</th>
                     <th>Actions</th>
                 </tr>
@@ -152,11 +152,11 @@
                     <td>
                         <div class="cart-item-info">
                             <div class="cart-item-image">
-                                <i class="fas fa-file-contract"></i>
+                                <i class="fas fa-user-tie"></i>
                             </div>
                             <div>
                                 <div class="cart-item-name">{{ item.service.name }}</div>
-                                <div class="text-muted small">{{ item.service.price }} € / unité</div>
+                                <div class="text-muted small">{{ item.service.price }} € / séance</div>
                             </div>
                         </div>
                     </td>
@@ -186,21 +186,21 @@
                 <span>{{ cart.total_price }} €</span>
             </div>
             <div class="summary-row">
-                <span>Honoraires de gestion</span>
+                <span>Frais de dossier</span>
                 <span>0 €</span>
             </div>
             <div class="summary-row total-row">
                 <span>Total Estimé</span>
                 <span>{{ cart.total_price }} €</span>
             </div>
-            <a href="{% url 'order_create' %}" class="cta-btn checkout-btn">Procéder à la commande</a>
+            <a href="{% url 'order_create' %}" class="cta-btn checkout-btn">Confirmer les consultations</a>
         </div>
     {% else %}
         <div class="glass-card" style="text-align: center; padding: 5rem;">
-            <i class="fas fa-shopping-cart fa-4x" style="margin-bottom: 2rem; opacity: 0.2;"></i>
-            <h2>Votre panier est actuellement vide.</h2>
-            <p class="text-muted" style="margin-bottom: 3rem;">Nos experts sont à votre disposition pour vous accompagner.</p>
-            <a href="{% url 'service_list' %}" class="cta-btn">Découvrir nos services</a>
+            <i class="fas fa-calendar-times fa-4x" style="margin-bottom: 2rem; opacity: 0.2;"></i>
+            <h2>Vous n'avez sélectionné aucun avocat.</h2>
+            <p class="text-muted" style="margin-bottom: 3rem;">Nos avocats associés sont à votre disposition pour vous accompagner.</p>
+            <a href="{% url 'service_list' %}" class="cta-btn">Choisir un avocat</a>
         </div>
     {% endif %}
 </div>

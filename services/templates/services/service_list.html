@@ -1,178 +1,507 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Expertises Juridiques | Judicia Luxe{% endblock %}
+{% block title %}Nos Avocats | Judicia Luxe{% endblock %}
 
 {% block extra_css %}
-    .page-header {
-        padding: 8rem 0 4rem;
-        text-align: center;
-        background: var(--secondary);
+    .hero {
+        position: relative;
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        background-color: #000;
+        background-image: 
+            linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.2) 100%),
+            url('https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+        background-size: cover;
+        background-position: center center;
+        margin-top: -80px;
+        padding-top: 80px;
     }
 
-    .page-header h1 {
-        font-size: 4rem;
+    .hero-content {
+        max-width: 600px;
+        margin-left: 5%;
+    }
+
+    .hero-content h1 {
+        font-size: 3.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        line-height: 1.2;
+        color: #ffffff;
+        font-family: 'Georgia', serif;
+    }
+
+    .hero-content h1 span {
         color: var(--accent);
-        margin-bottom: 2rem;
     }
 
-    .page-header p {
-        color: var(--text-muted);
-        max-width: 700px;
-        margin: 0 auto;
-        font-size: 1.2rem;
+    .hero-subtitle {
+        color: var(--accent);
+        font-size: 1.1rem;
+        font-style: italic;
+        margin-bottom: 1.5rem;
+        font-family: 'Georgia', serif;
     }
 
-    .service-grid {
+    .hero-content p {
+        font-size: 1rem;
+        color: #e0e0e0;
+        line-height: 1.6;
+        max-width: 450px;
+    }
+
+    .title-separator {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: var(--accent);
+    }
+
+    .title-separator.center {
+        justify-content: center;
+    }
+
+    .title-separator::before, .title-separator::after {
+        content: "";
+        height: 1px;
+        width: 40px;
+        background-color: var(--accent);
+    }
+
+    /* Lawyer Grid */
+    .section-white {
+        background-color: #ffffff;
+        padding: 5rem 2rem;
+    }
+
+    .lawyer-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2.5rem;
-        margin-top: 5rem;
+        gap: 30px;
+        max-width: 1100px;
+        margin: 0 auto;
     }
 
-    .service-card {
-        padding: 3rem;
+    .lawyer-card {
+        background: #ffffff;
+        border: 1px solid #eaeaea;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
     }
 
-    .service-card i {
-        font-size: 2.5rem;
+    .lawyer-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .lawyer-img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        object-position: top;
+        background-color: #f5f5f5;
+    }
+
+    .lawyer-content {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .lawyer-name {
+        font-family: 'Georgia', serif;
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #000;
+        margin-bottom: 0.2rem;
+    }
+
+    .lawyer-title {
+        color: #666;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .lawyer-meta {
+        display: flex;
+        gap: 15px;
+        font-size: 0.8rem;
+        color: var(--accent);
+        margin-bottom: 1rem;
+        border-top: 1px solid #f0f0f0;
+        border-bottom: 1px solid #f0f0f0;
+        padding: 0.8rem 0;
+    }
+
+    .lawyer-meta span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .lawyer-desc {
+        color: #555;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+
+    .lawyer-btn {
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        padding: 0.8rem;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: none;
+        border-radius: 2px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .lawyer-btn:hover {
+        background-color: var(--accent);
+        color: #000;
+    }
+
+    /* Valeurs Section */
+    .section-black {
+        background-color: #0a0a0a;
+        color: #fff;
+        padding: 5rem 2rem;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 3.5rem;
+    }
+
+    .section-title h2 {
+        font-family: 'Georgia', serif;
+        font-size: 1.8rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: #fff;
+        margin-bottom: 1rem;
+    }
+
+    .valeurs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        max-width: 1100px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .valeur-item {
+        border-right: 1px solid rgba(255,255,255,0.1);
+        padding: 0 15px;
+    }
+    
+    .valeur-item:last-child {
+        border-right: none;
+    }
+
+    .valeur-item i {
+        font-size: 2rem;
         color: var(--accent);
         margin-bottom: 1.5rem;
     }
 
-    .service-card h3 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-    }
-
-    .service-card .category-badge {
-        display: inline-block;
-        padding: 3px 10px;
-        border: 1px solid var(--accent);
+    .valeur-item h4 {
         color: var(--accent);
-        font-size: 0.75rem;
+        font-size: 0.85rem;
+        font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 1rem;
-        border-radius: 20px;
     }
 
-    .service-card .description {
-        color: var(--text-muted);
-        margin-bottom: 2rem;
-        font-size: 1rem;
-    }
-
-    .service-card .price {
-        font-size: 1.5rem;
-        color: var(--text-light);
-        font-weight: 700;
-        margin-bottom: 2rem;
-    }
-
-    .service-card .price small {
+    .valeur-item p {
+        color: #aaa;
         font-size: 0.8rem;
-        color: var(--text-muted);
-        font-weight: 300;
+        line-height: 1.6;
     }
 
-    .category-filter {
+    @media (max-width: 768px) {
+        .valeur-item {
+            border-right: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 20px 0;
+        }
+        .valeur-item:last-child {
+            border-bottom: none;
+        }
+    }
+
+    /* CTA Banner */
+    .section-beige {
+        background-color: #faf9f6;
+        padding: 4rem 2rem;
+    }
+
+    .cta-banner {
+        max-width: 1100px;
+        margin: 0 auto;
         display: flex;
-        justify-content: center;
-        gap: 1.5rem;
+        justify-content: space-between;
+        align-items: center;
         flex-wrap: wrap;
-        margin-top: 3rem;
+        gap: 20px;
     }
 
-    .filter-btn {
-        background: transparent;
-        border: 1px solid var(--glass-border);
-        color: var(--text-muted);
-        padding: 0.6rem 2rem;
-        border-radius: 4px;
+    .cta-text {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .cta-text i {
+        font-size: 3rem;
+        color: #111;
+        background: #fff;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .cta-text h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.4rem;
+        color: #111;
+        font-family: 'Georgia', serif;
+        font-weight: bold;
+    }
+
+    .cta-text p {
+        margin: 0;
+        font-size: 0.95rem;
+        color: #555;
+    }
+
+    .cta-btn-gold {
+        background-color: #c9a45c;
+        color: #fff;
+        padding: 1rem 2.5rem;
+        border-radius: 2px;
+        font-weight: bold;
         text-transform: uppercase;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
+        letter-spacing: 1px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: inline-block;
+        transition: background-color 0.3s;
     }
 
-    .filter-btn:hover, .filter-btn.active {
-        color: var(--accent);
-        border-color: var(--accent);
-        background: var(--glass);
+    .cta-btn-gold:hover {
+        background-color: #b5924d;
+        color: #fff;
     }
 {% endblock %}
 
 {% block content %}
-    <header class="page-header">
-        <div class="container animate-fade">
-            <h1>Expertises Exceptionnelles</h1>
-            <p>Une rigueur absolue, une discrétion totale, des résultats hors normes. Découvrez nos pôles d'excellence spécialisés.</p>
-            
-            <div class="category-filter">
-                <button class="filter-btn active">Tout</button>
-                {% for category in categories %}
-                    <button class="filter-btn">{{ category.name }}</button>
-                {% endfor %}
-            </div>
+    <!-- HERO SECTION -->
+    <section class="hero animate-fade">
+        <div class="hero-content">
+            <h1>NOS <span>AVOCATS</span></h1>
+            <p class="hero-subtitle">Une équipe d'excellence à votre service</p>
+            <div class="title-separator" style="margin-bottom: 1.5rem;"><i class="fas fa-balance-scale"></i></div>
+            <p>Nos avocats mettent leur expertise et leur engagement à votre service pour vous offrir des solutions juridiques sur mesure et vous accompagner dans la défense de vos droits.</p>
         </div>
-    </header>
+    </section>
 
-    <div class="container">
-        <div class="service-grid">
+    <!-- LAWYERS GRID -->
+    <section class="section-white">
+        <div class="lawyer-grid">
             {% for service in services %}
-                <div class="service-card glass-card">
-                    <div>
-                        <span class="category-badge">{{ service.category.name }}</span>
-                        <i class="fas fa-landmark"></i>
-                        <h3>{{ service.name }}</h3>
-                        <p class="description">{{ service.description }}</p>
-                    </div>
-                    <div>
-                        <div class="price">{{ service.price }} € <small>/ dossier</small></div>
-                        <a href="{% url 'service_detail' service.pk %}" class="cta-btn" style="width: 100%; text-align: center; border: none; font-size: 0.9rem;">Consulter</a>
+                <div class="lawyer-card">
+                    {% if service.image %}
+                        <img src="{{ service.image.url }}" alt="{{ service.name }}" class="lawyer-img">
+                    {% else %}
+                        {% if "Mehdi" in service.name %}
+                            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=500&q=80" alt="{{ service.name }}" class="lawyer-img">
+                        {% elif "Asmae" in service.name %}
+                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=500&q=80" alt="{{ service.name }}" class="lawyer-img">
+                        {% elif "Youssef" in service.name %}
+                            <img src="https://images.unsplash.com/photo-1600878459196-2615469994c6?auto=format&fit=crop&w=500&q=80" alt="{{ service.name }}" class="lawyer-img">
+                        {% elif "Kawtar" in service.name %}
+                            <img src="https://images.unsplash.com/photo-1573496358961-3c82861ab8f4?auto=format&fit=crop&w=500&q=80" alt="{{ service.name }}" class="lawyer-img">
+                        {% elif "Rachid" in service.name %}
+                            <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=500&q=80" alt="{{ service.name }}" class="lawyer-img">
+                        {% elif "Lina" in service.name %}
+                            <img src="https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?auto=format&fit=crop&w=500&q=80" alt="{{ service.name }}" class="lawyer-img">
+                        {% else %}
+                            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=500&q=80" alt="Avocat" class="lawyer-img">
+                        {% endif %}
+                    {% endif %}
+                    <div class="lawyer-content">
+                        <h3 class="lawyer-name">{{ service.name }}</h3>
+                        <p class="lawyer-title">Avocat Associé</p>
+                        <div class="lawyer-meta">
+                            <span><i class="far fa-folder-open"></i> {{ service.category.name }}</span>
+                            <span><i class="far fa-clock"></i> Expert</span>
+                        </div>
+                        <p class="lawyer-desc">{{ service.description|truncatewords:20 }}</p>
+                        <a href="{% url 'service_detail' service.pk %}" class="lawyer-btn">PRENDRE RENDEZ-VOUS <i class="far fa-calendar-alt"></i></a>
                     </div>
                 </div>
             {% empty %}
-                 <div class="service-card glass-card">
-                    <div>
-                        <span class="category-badge">DROIT DES AFFAIRES</span>
-                        <i class="fas fa-briefcase"></i>
-                        <h3>Fusions & Acquisitions</h3>
-                        <p class="description">Accompagnement strategique pour les transactions nationales et transfrontalières, du due diligence à la signature finale.</p>
-                    </div>
-                    <div>
-                        <div class="price">2,500 € <small>/ heure</small></div>
-                        <a href="#" class="cta-btn" style="width: 100%; text-align: center; border: none; font-size: 0.9rem;">Consulter</a>
-                    </div>
-                </div>
-                <div class="service-card glass-card" style="border-color: var(--accent);">
-                    <div>
-                        <span class="category-badge">PATRIMOINE</span>
-                        <i class="fas fa-crown"></i>
-                        <h3>Gestion de Fortune</h3>
-                        <p class="description">Protection et optimisation fiscale des actifs pour les clients High-Net-Worth. Structuration de trusts et holdings.</p>
-                    </div>
-                    <div>
-                        <div class="price">À partir de 10k €</div>
-                        <a href="#" class="cta-btn" style="width: 100%; text-align: center; border: none; font-size: 0.9rem;">Consulter</a>
+                <!-- Mehdi EL MANSOURI -->
+                <div class="lawyer-card">
+                    <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=500&q=80" alt="Mehdi EL MANSOURI" class="lawyer-img">
+                    <div class="lawyer-content">
+                        <h3 class="lawyer-name">Mehdi EL MANSOURI</h3>
+                        <p class="lawyer-title">Avocat Associé</p>
+                        <div class="lawyer-meta">
+                            <span><i class="far fa-folder-open"></i> Droit pénal</span>
+                            <span><i class="far fa-clock"></i> 15 ans d'expérience</span>
+                        </div>
+                        <p class="lawyer-desc">Spécialiste en droit pénal, il intervient dans la défense des personnes physiques et morales devant les juridictions pénales.</p>
+                        <a href="#" class="lawyer-btn">PRENDRE RENDEZ-VOUS <i class="far fa-calendar-alt"></i></a>
                     </div>
                 </div>
-                <div class="service-card glass-card">
-                    <div>
-                        <span class="category-badge">DIGITAL</span>
-                        <i class="fas fa-microchip"></i>
-                        <h3>Propriété Intellectuelle</h3>
-                        <p class="description">Protection des brevets technologiques et gestion des droits d'auteur devant l'OEB et l'INPI.</p>
+
+                <!-- Asmae BENKIRANE -->
+                <div class="lawyer-card">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=500&q=80" alt="Asmae BENKIRANE" class="lawyer-img">
+                    <div class="lawyer-content">
+                        <h3 class="lawyer-name">Asmae BENKIRANE</h3>
+                        <p class="lawyer-title">Avocate Associée</p>
+                        <div class="lawyer-meta">
+                            <span><i class="far fa-folder-open"></i> Droit des affaires</span>
+                            <span><i class="far fa-clock"></i> 12 ans d'expérience</span>
+                        </div>
+                        <p class="lawyer-desc">Experte en droit des affaires et en droit commercial, elle accompagne les entreprises dans leurs projets et contentieux.</p>
+                        <a href="#" class="lawyer-btn">PRENDRE RENDEZ-VOUS <i class="far fa-calendar-alt"></i></a>
                     </div>
-                    <div>
-                        <div class="price">3,200 € <small>/ dépôt</small></div>
-                        <a href="#" class="cta-btn" style="width: 100%; text-align: center; border: none; font-size: 0.9rem;">Consulter</a>
+                </div>
+
+                <!-- Youssef TAZI -->
+                <div class="lawyer-card">
+                    <img src="https://images.unsplash.com/photo-1600878459196-2615469994c6?auto=format&fit=crop&w=500&q=80" alt="Youssef TAZI" class="lawyer-img">
+                    <div class="lawyer-content">
+                        <h3 class="lawyer-name">Youssef TAZI</h3>
+                        <p class="lawyer-title">Avocat</p>
+                        <div class="lawyer-meta">
+                            <span><i class="far fa-folder-open"></i> Droit civil</span>
+                            <span><i class="far fa-clock"></i> 10 ans d'expérience</span>
+                        </div>
+                        <p class="lawyer-desc">Intervient en matière de droit civil : contrats, responsabilités, dommages et intérêts et résolution des litiges.</p>
+                        <a href="#" class="lawyer-btn">PRENDRE RENDEZ-VOUS <i class="far fa-calendar-alt"></i></a>
+                    </div>
+                </div>
+
+                <!-- Kawtar EL HASSANI -->
+                <div class="lawyer-card">
+                    <img src="https://images.unsplash.com/photo-1573496358961-3c82861ab8f4?auto=format&fit=crop&w=500&q=80" alt="Kawtar EL HASSANI" class="lawyer-img">
+                    <div class="lawyer-content">
+                        <h3 class="lawyer-name">Kawtar EL HASSANI</h3>
+                        <p class="lawyer-title">Avocate</p>
+                        <div class="lawyer-meta">
+                            <span><i class="far fa-folder-open"></i> Droit de la famille</span>
+                            <span><i class="far fa-clock"></i> 8 ans d'expérience</span>
+                        </div>
+                        <p class="lawyer-desc">Spécialiste en droit de la famille, elle vous accompagne dans les procédures de divorce, garde d'enfants et successions.</p>
+                        <a href="#" class="lawyer-btn">PRENDRE RENDEZ-VOUS <i class="far fa-calendar-alt"></i></a>
+                    </div>
+                </div>
+
+                <!-- Rachid AMRANI -->
+                <div class="lawyer-card">
+                    <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=500&q=80" alt="Rachid AMRANI" class="lawyer-img">
+                    <div class="lawyer-content">
+                        <h3 class="lawyer-name">Rachid AMRANI</h3>
+                        <p class="lawyer-title">Avocat</p>
+                        <div class="lawyer-meta">
+                            <span><i class="far fa-folder-open"></i> Droit social</span>
+                            <span><i class="far fa-clock"></i> 9 ans d'expérience</span>
+                        </div>
+                        <p class="lawyer-desc">Conseil et représentation en droit du travail et en relations sociales, aussi bien pour les salariés que pour les employeurs.</p>
+                        <a href="#" class="lawyer-btn">PRENDRE RENDEZ-VOUS <i class="far fa-calendar-alt"></i></a>
+                    </div>
+                </div>
+
+                <!-- Lina BOUSSAIDI -->
+                <div class="lawyer-card">
+                    <img src="https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?auto=format&fit=crop&w=500&q=80" alt="Lina BOUSSAIDI" class="lawyer-img">
+                    <div class="lawyer-content">
+                        <h3 class="lawyer-name">Lina BOUSSAIDI</h3>
+                        <p class="lawyer-title">Avocate</p>
+                        <div class="lawyer-meta">
+                            <span><i class="far fa-folder-open"></i> Droit immobilier</span>
+                            <span><i class="far fa-clock"></i> 7 ans d'expérience</span>
+                        </div>
+                        <p class="lawyer-desc">Experte en droit immobilier, elle vous assiste dans vos transactions, baux et litiges immobiliers.</p>
+                        <a href="#" class="lawyer-btn">PRENDRE RENDEZ-VOUS <i class="far fa-calendar-alt"></i></a>
                     </div>
                 </div>
             {% endfor %}
         </div>
-    </div>
+    </section>
+
+    <!-- VALEURS SECTION -->
+    <section class="section-black">
+        <div class="section-title">
+            <h2>NOS VALEURS</h2>
+            <div class="title-separator center"><i class="fas fa-balance-scale"></i></div>
+        </div>
+
+        <div class="valeurs-grid">
+            <div class="valeur-item">
+                <i class="fas fa-lock"></i>
+                <h4>CONFIDENTIALITÉ</h4>
+                <p>La confidentialité de vos informations est notre priorité absolue.</p>
+            </div>
+            
+            <div class="valeur-item">
+                <i class="far fa-star"></i>
+                <h4>EXPERTISE</h4>
+                <p>Une équipe compétente et spécialisée dans chaque domaine du droit.</p>
+            </div>
+            
+            <div class="valeur-item">
+                <i class="far fa-handshake"></i>
+                <h4>ENGAGEMENT</h4>
+                <p>Nous nous engageons à défendre vos droits avec rigueur et détermination.</p>
+            </div>
+            
+            <div class="valeur-item">
+                <i class="fas fa-user-friends"></i>
+                <h4>PROXIMITÉ</h4>
+                <p>Nous sommes à vos côtés à chaque étape de votre démarche.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="section-beige">
+        <div class="cta-banner">
+            <div class="cta-text">
+                <i class="far fa-calendar-alt"></i>
+                <div>
+                    <h3>BESOIN D'UN AVOCAT ?</h3>
+                    <p>Prenez rendez-vous dès maintenant et bénéficiez<br>d'un accompagnement juridique personnalisé.</p>
+                </div>
+            </div>
+            <div>
+                <a href="#" class="cta-btn-gold"><i class="far fa-calendar-alt"></i> PRENDRE RENDEZ-VOUS</a>
+            </div>
+        </div>
+    </section>
 {% endblock %}

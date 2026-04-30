@@ -6,17 +6,23 @@
 {% block content %}
 <div class="container animate-fade" style="padding: 10rem 0;">
     <div class="glass-card" style="max-width: 500px; margin: 0 auto; padding: 4rem;">
-        <h1 style="text-align: center; margin-bottom: 3rem; color: var(--accent);">Accès Client Luxe</h1>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <i class="fas fa-lock fa-3x" style="color: var(--accent); margin-bottom: 1rem;"></i>
+            <h1 style="color: var(--text-light); font-size: 2rem;">Espace Client Sécurisé</h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Accédez à vos consultations et informations personnelles.</p>
+        </div>
         <form method="POST">
             {% csrf_token %}
             {{ form|crispy }}
             <button type="submit" class="cta-btn" style="width: 100%; margin-top: 2rem; border: none;">
-                Se connecter
+                <i class="fas fa-sign-in-alt"></i> Se connecter
             </button>
         </form>
-        <p style="text-align: center; margin-top: 2rem; color: var(--text-muted);">
-            Nouveau chez nous ? <a href="{% url 'signup' %}" style="color: var(--accent);">S'inscrire</a>
-        </p>
+        <div style="text-align: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--glass-border);">
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+                Nouveau client ? <a href="{% url 'signup' %}" style="color: var(--accent); text-decoration: none; font-weight: bold;">Ouvrir un dossier</a>
+            </p>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Validation de commande | Judicia Luxe{% endblock %}
+{% block title %}Validation de rendez-vous | Judicia Luxe{% endblock %}
 
 {% block extra_css %}
     .checkout-container {
@@ -44,11 +44,11 @@
 
 {% block content %}
 <div class="container checkout-container animate-fade">
-    <h1 style="font-size: 3rem; margin-bottom: 4rem; color: var(--accent);">Finalisez votre demande</h1>
+    <h1 style="font-size: 3rem; margin-bottom: 4rem; color: var(--accent);">Finalisez votre demande de consultation</h1>
     
     <div class="checkout-grid">
         <div class="glass-card" style="padding: 4rem;">
-            <h2 style="margin-bottom: 3rem;">Informations de Facturation</h2>
+            <h2 style="margin-bottom: 3rem;">Vos Coordonnées</h2>
             <form method="POST">
                 {% csrf_token %}
                 <div class="row">
@@ -56,6 +56,7 @@
                     <div class="col-md-6">{{ form.last_name|as_crispy_field }}</div>
                 </div>
                 {{ form.email|as_crispy_field }}
+                {{ form.consultation_type|as_crispy_field }}
                 {{ form.address|as_crispy_field }}
                 <div class="row">
                     <div class="col-md-6">{{ form.postal_code|as_crispy_field }}</div>
@@ -63,14 +64,14 @@
                 </div>
                 
                 <button type="submit" class="cta-btn" style="width: 100%; margin-top: 3rem; border: none;">
-                    Valider et Commander
+                    Confirmer le rendez-vous
                 </button>
             </form>
         </div>
         
         <div>
             <div class="summary-card">
-                <h3 style="margin-bottom: 2rem;">Résumé de la commande</h3>
+                <h3 style="margin-bottom: 2rem;">Résumé des consultations</h3>
                 {% for item in cart.items.all %}
                 <div class="summary-item">
                     <span>{{ item.quantity }} x {{ item.service.name }}</span>

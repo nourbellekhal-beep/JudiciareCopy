@@ -3,13 +3,19 @@ from django.conf import settings
 from services.models import Service
 
 class Order(models.Model):
+    CONSULTATION_CHOICES = [
+        ('online', 'En ligne (Visioconférence sécurisée)'),
+        ('in_person', 'En cabinet (Paris)'),
+    ]
+    
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, verbose_name="Prénom")
+    last_name = models.CharField(max_length=100, verbose_name="Nom")
     email = models.EmailField()
-    address = models.CharField(max_length=250)
-    city = models.CharField(max_length=100)
-    postal_code = models.CharField(max_length=20)
+    address = models.CharField(max_length=250, verbose_name="Adresse", blank=True, null=True)
+    city = models.CharField(max_length=100, verbose_name="Ville", blank=True, null=True)
+    postal_code = models.CharField(max_length=20, verbose_name="Code postal", blank=True, null=True)
+    consultation_type = models.CharField(max_length=20, choices=CONSULTATION_CHOICES, default='in_person', verbose_name="Type de consultation")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
