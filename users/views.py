@@ -10,9 +10,6 @@ class SignupView(CreateView):
 
 class UserLoginView(LoginView):
     template_name = 'users/login.html'
-    
-    def get_success_url(self):
-        return reverse_lazy('home')
 
 class UserLogoutView(LogoutView):
     next_page = reverse_lazy('home')

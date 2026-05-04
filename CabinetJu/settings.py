@@ -211,3 +211,8 @@ JAZZMIN_UI_CONFIG = {
         "success": "btn-success"
     }
 }
+
+# Authentication Settings
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'home'
