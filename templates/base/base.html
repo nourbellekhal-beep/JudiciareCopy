@@ -183,6 +183,10 @@
         footer .social-icons a:hover {
             color: var(--accent);
         }
+
+        .text-accent {
+            color: var(--accent) !important;
+        }
     </style>
     <style>
         {% block extra_css %}{% endblock %}
@@ -207,13 +211,26 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">ACCUEIL</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">À PROPOS</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'service_list' %}">DOMAINES</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'service_list' %}">PRISE DE RENDEZ-VOUS</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">CONTACT</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">ESPACE CLIENT</a></li>
                 </ul>
-                <div class="d-flex">
-                    <a href="{% url 'service_list' %}" class="cta-btn" style="padding: 0.6rem 1.2rem; font-size: 0.7rem;">CONSULTATION</a>
+                <div class="d-flex align-items-center gap-3">
+                    {% if user.is_authenticated %}
+                        <span class="text-accent small text-uppercase fw-bold" style="font-size: 0.65rem; letter-spacing: 1px;">
+                            <i class="fas fa-user-circle me-1"></i> Bienvenue, {{ user.first_name|default:user.username }}
+                        </span>
+                        <form action="{% url 'logout' %}" method="post" class="m-0">
+                            {% csrf_token %}
+                            <button type="submit" class="cta-btn-outline" style="padding: 0.5rem 1rem; font-size: 0.65rem; border-width: 1px;">
+                                DÉCONNEXION
+                            </button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="cta-btn" style="padding: 0.6rem 1.2rem; font-size: 0.7rem;">
+                            CONNEXION
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

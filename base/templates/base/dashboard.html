@@ -5,7 +5,7 @@
 
 {% block extra_css %}
     <style>
-        body { background-color: #f8f9fa; color: #333; }
+        body { background-color: #f8f9fa; color: #1a1a1a; }
         .navbar { background-color: #000 !important; }
         footer { display: none; }
 
@@ -40,7 +40,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            color: #aaa;
+            color: #ccc;
             text-decoration: none;
             transition: all 0.3s ease;
             font-size: 0.9rem;
@@ -67,10 +67,11 @@
 
         .dashboard-header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             color: #000;
+            font-weight: 800;
         }
 
         /* Summary Cards */
@@ -83,38 +84,40 @@
 
         .summary-card {
             background: #fff;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 4px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             display: flex;
             align-items: center;
             gap: 20px;
         }
 
         .summary-icon {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             background-color: rgba(212, 175, 55, 0.1);
             color: var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 4px;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
         }
 
         .summary-info h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
+            font-size: 2rem;
+            font-weight: 900;
             margin-bottom: 2px;
+            color: #000;
         }
 
         .summary-info p {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #888;
+            letter-spacing: 1.5px;
+            color: #555;
             margin: 0;
+            font-weight: 600;
         }
 
         /* Grid Layout for Sections */
@@ -126,45 +129,49 @@
 
         .section-card {
             background: #fff;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 4px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
         .section-card h4 {
             font-family: 'Playfair Display', serif;
-            font-size: 1rem;
+            font-size: 1.2rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             margin-bottom: 2rem;
             color: #000;
-            border-bottom: 1px solid #eee;
+            border-bottom: 2px solid var(--accent);
             padding-bottom: 1rem;
+            font-weight: 700;
         }
 
         /* Table Style */
         .table {
-            font-size: 0.85rem;
+            font-size: 0.95rem;
+            color: #1a1a1a;
         }
 
         .table thead th {
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.7rem;
-            color: #888;
+            letter-spacing: 1.5px;
+            font-size: 0.75rem;
+            color: #555;
             border-top: none;
+            font-weight: 700;
+            padding-bottom: 1rem;
         }
 
         .status-badge {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 800;
             text-transform: uppercase;
         }
 
-        .status-en-cours { background-color: #fff3cd; color: #856404; }
-        .status-attente { background-color: #f8d7da; color: #721c24; }
+        .status-en-cours { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .status-attente { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
 
         /* Next Appointment Card */
         .next-appt-card {
@@ -227,8 +234,8 @@
         <nav>
             <ul class="sidebar-menu">
                 <li><a href="{% url 'dashboard' %}" class="sidebar-link active"><i class="fas fa-th-large"></i> Tableau de bord</a></li>
-                <li><a href="#" class="sidebar-link"><i class="fas fa-folder"></i> Mes dossiers</a></li>
-                <li><a href="#" class="sidebar-link"><i class="fas fa-calendar-alt"></i> Mes consultations</a></li>
+                <li><a href="{% url 'mes_dossiers' %}" class="sidebar-link"><i class="fas fa-folder"></i> Mes dossiers</a></li>
+                <li><a href="{% url 'mes_consultations' %}" class="sidebar-link"><i class="fas fa-calendar-alt"></i> Mes consultations</a></li>
                 <li><a href="#" class="sidebar-link"><i class="fas fa-comment"></i> Messages</a></li>
                 <li><a href="#" class="sidebar-link"><i class="fas fa-credit-card"></i> Paiements</a></li>
                 <li><a href="#" class="sidebar-link"><i class="fas fa-user"></i> Mon profil</a></li>
@@ -255,21 +262,21 @@
             <div class="summary-card">
                 <div class="summary-icon"><i class="fas fa-file-alt"></i></div>
                 <div class="summary-info">
-                    <h3>3</h3>
+                    <h3>{{ active_dossiers_count }}</h3>
                     <p>Dossiers actifs</p>
                 </div>
             </div>
             <div class="summary-card">
                 <div class="summary-icon"><i class="fas fa-calendar-check"></i></div>
                 <div class="summary-info">
-                    <h3>2</h3>
+                    <h3>{{ upcoming_consultations_count }}</h3>
                     <p>Consultations à venir</p>
                 </div>
             </div>
             <div class="summary-card">
                 <div class="summary-icon"><i class="fas fa-envelope"></i></div>
                 <div class="summary-info">
-                    <h3>1</h3>
+                    <h3>{{ unread_messages_count }}</h3>
                     <p>Message non lu</p>
                 </div>
             </div>
@@ -291,39 +298,47 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for order in orders %}
                             <tr>
-                                <td>Dossier #2024-001</td>
-                                <td>Droit des affaires</td>
-                                <td><span class="status-badge status-en-cours">En cours</span></td>
-                                <td>12/05/2024</td>
+                                <td>Dossier #{{ order.id }}</td>
+                                <td>{{ order.items.first.service.name|default:"Consultation" }}</td>
+                                <td>
+                                    {% if order.paid %}
+                                    <span class="status-badge status-en-cours">Payé</span>
+                                    {% else %}
+                                    <span class="status-badge status-attente">En attente</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ order.created_at|date:"d/m/Y" }}</td>
                             </tr>
+                            {% empty %}
                             <tr>
-                                <td>Dossier #2024-002</td>
-                                <td>Droit civil</td>
-                                <td><span class="status-badge status-en-cours">En cours</span></td>
-                                <td>10/05/2024</td>
+                                <td colspan="4" class="text-center text-muted">Aucun dossier trouvé.</td>
                             </tr>
-                            <tr>
-                                <td>Dossier #2024-003</td>
-                                <td>Droit pénal</td>
-                                <td><span class="status-badge status-attente">En attente</span></td>
-                                <td>08/05/2024</td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
-                <a href="#" class="expertise-link mt-4 d-inline-block">VOIR TOUS LES DOSSIERS &rarr;</a>
+                <a href="{% url 'mes_dossiers' %}" class="expertise-link mt-4 d-inline-block">VOIR TOUS LES DOSSIERS &rarr;</a>
             </div>
 
             <!-- SIDE COLUMN -->
             <div>
                 <div class="next-appt-card">
                     <h5 style="font-size: 0.75rem; letter-spacing: 2px; color: var(--accent); margin-bottom: 1.5rem;">PROCHAINE CONSULTATION</h5>
-                    <div class="appt-date">15</div>
-                    <div class="appt-month" style="font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">MAI 2024</div>
-                    <div class="appt-time">10:00</div>
-                    <p style="font-size: 0.85rem; margin-bottom: 2rem;">Avec Me. Claire Dupont<br><span style="color: #888;">Droit civil</span></p>
-                    <a href="#" class="cta-btn" style="width: 100%; justify-content: center; font-size: 0.7rem; padding: 0.8rem;">VOIR LE DÉTAIL</a>
+                    {% if next_order %}
+                        <div class="appt-date">{{ next_order.created_at|date:"d" }}</div>
+                        <div class="appt-month" style="font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">{{ next_order.created_at|date:"M Y" }}</div>
+                        <div class="appt-time">{{ next_order.created_at|date:"H:i" }}</div>
+                        <p style="font-size: 0.85rem; margin-bottom: 2rem;">
+                            Avec {{ next_order.items.first.service.name|default:"un Expert" }}<br>
+                            <span style="color: #888;">{{ next_order.items.first.service.category.name }}</span>
+                        </p>
+                        <a href="#" class="cta-btn" style="width: 100%; justify-content: center; font-size: 0.7rem; padding: 0.8rem;">VOIR LE DÉTAIL</a>
+                    {% else %}
+                        <p style="font-size: 0.85rem; color: #888;">Aucune consultation prévue.</p>
+                        <a href="{% url 'service_list' %}" class="cta-btn" style="width: 100%; justify-content: center; font-size: 0.7rem; padding: 0.8rem;">RÉSERVER</a>
+                    {% endif %}
                 </div>
 
                 <div class="section-card">

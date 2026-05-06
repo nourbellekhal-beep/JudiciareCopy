@@ -444,26 +444,16 @@
             </div>
 
             <div class="team-grid">
+                {% for service in featured_services %}
                 <div class="team-card">
-                    <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80')"></div>
-                    <h4>Me. Alexandre Martin</h4>
-                    <p>Droit des affaires</p>
+                    <div class="team-img" style="background-image: url('{% if service.image %}{{ service.image.url }}{% else %}https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80{% endif %}')"></div>
+                    <h4>{{ service.name }}</h4>
+                    <p>{{ service.category.name }}</p>
+                    <a href="{% url 'service_detail' service.pk %}" class="expertise-link">Prendre RDV &rarr;</a>
                 </div>
-                <div class="team-card">
-                    <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80')"></div>
-                    <h4>Me. Claire Dupont</h4>
-                    <p>Droit civil</p>
-                </div>
-                <div class="team-card">
-                    <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80')"></div>
-                    <h4>Me. Julien Bernard</h4>
-                    <p>Droit pénal</p>
-                </div>
-                <div class="team-card">
-                    <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=400&q=80')"></div>
-                    <h4>Me. Sophie Leroy</h4>
-                    <p>Droit de la famille</p>
-                </div>
+                {% empty %}
+                <p class="text-center text-muted">Notre équipe arrive bientôt.</p>
+                {% endfor %}
             </div>
         </div>
     </section>
